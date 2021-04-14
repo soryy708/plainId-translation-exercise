@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SectionHeader from '../common/SectionHeader';
 import {ReadOnlyTextArea, TextField} from '../../fields';
-import { useTranslationNamespace } from '../../../service/translation';
+import { getLocalizer, useTranslationNamespace } from '../../../service/translation';
 
 const SectionContainer = styled.div`
     width: 60%;
@@ -19,7 +19,7 @@ const FieldsContainer = styled.div`
 export default function GeneralDetailsSection({resource}) {
     useTranslationNamespace('generalDetails', language => import(`./locales/${language}/strings.json`));
 
-    const {t} = global;
+    const t = getLocalizer();
     const sectionHeaderProps = {
         headerText: t('SECTION_TITLE'),
         subHeaderText: t('SECTION_SUB_TITLE')

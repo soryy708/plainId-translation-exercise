@@ -2,22 +2,24 @@ import i18n from 'i18next';
 import { useState, useEffect } from 'react';
 
 const globalContext = {
+    t: null,
     languageChangeListeners: [],
 };
 
-export const init = ({lang}) => {
+export const init = ({lang}, context = globalContext) => {
     return new Promise((resolve, reject) => {
         i18n.init({
             lng: lang,
             resources: {},
         }, (err, t) => {
             if (err) return reject(err);
-
-            global.t = t;
+            context.t = t;
             resolve();
         });
     });
 };
+
+export const getLocalizer = (context = globalContext) => context.t;
 
 /**
  * 

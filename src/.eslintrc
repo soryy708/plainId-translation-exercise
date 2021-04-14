@@ -15,8 +15,7 @@
         "node": false
     },
     "globals": {
-        "process": "readonly",
-        "global": "readonly"
+        "process": "readonly"
     },
     "settings": {
         "react":{
