@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {HeaderText, SubHeaderText} from '../../styles/commonStyles';
-import { getLanguage, useTranslationNamespace } from '../../service/translation';
+import { useTranslationNamespace } from '../../service/translation';
 
 const ResourceHeaderText = styled(HeaderText)`
     color: #686868;
@@ -9,12 +9,9 @@ const ResourceHeaderText = styled(HeaderText)`
 `;
 
 export default function ResourcesHeader() {
-    const [, setI18nLoaded] = useState(false);
-
     const {t} = global;
 
-    const language = getLanguage();
-    useTranslationNamespace('resourcesHeader', import(`./locales/${language}/strings.json`), () => setI18nLoaded(true));
+    useTranslationNamespace('resourcesHeader', language => import(`./locales/${language}/strings.json`));
 
     return (
         <>
