@@ -40,6 +40,7 @@ export default function HeaderPanel() {
               onChange={(ev) => setLanguage(ev.target.value)}
             >
               <option value="en-US">English (US)</option>
+              <option value="es">Spanish (Spain)</option>
             </select>
         </HeaderPanelContainer>
     );
