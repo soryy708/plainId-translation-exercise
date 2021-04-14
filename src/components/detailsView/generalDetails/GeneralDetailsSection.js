@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SectionHeader from '../common/SectionHeader';
 import {ReadOnlyTextArea, TextField} from '../../fields';
+import { getLanguage, useTranslationNamespace } from '../../../service/translation';
 
 const SectionContainer = styled.div`
     width: 60%;
@@ -16,28 +17,34 @@ const FieldsContainer = styled.div`
 `;
 
 export default function GeneralDetailsSection({resource}) {
+    const [, setI18nLoaded] = useState(false);
+
     const {t} = global;
     const sectionHeaderProps = {
-        headerText: t('GENERAL_DETAILS_SECTION_TITLE'),
-        subHeaderText: t('GENERAL_DETAILS_SECTION_SUB_TITLE')
+        headerText: t('generalDetails:SECTION_TITLE'),
+        subHeaderText: t('generalDetails:SECTION_SUB_TITLE')
     };
     const {name, description, resourceType, path} = resource;
     const nameProps = {
         value: name,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_NAME')
+        label: t('generalDetails:SECTION_FIELD_TITLE_NAME')
     };
     const descriptionProps = {
         value: description,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_DESCRIPTION')
+        label: t('generalDetails:SECTION_FIELD_TITLE_DESCRIPTION')
     };
     const resourceTypeProps = {
         value: resourceType,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_RESOURCE_TYPE')
+        label: t('generalDetails:SECTION_FIELD_TITLE_RESOURCE_TYPE')
     };
     const pathProps = {
         value: path,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_RESOURCE_PATH')
+        label: t('generalDetails:SECTION_FIELD_TITLE_RESOURCE_PATH')
     };
+
+    const language = getLanguage();
+    useTranslationNamespace('generalDetails', import(`./locales/${language}/strings.json`), () => setI18nLoaded(true));
+
     return (
         <SectionContainer>
             <SectionHeader {...sectionHeaderProps} />

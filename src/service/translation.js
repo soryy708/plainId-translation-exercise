@@ -1,15 +1,11 @@
 import i18n from 'i18next';
+import { useEffect } from 'react';
 
 export const init = ({lang}) => {
-    return new Promise(async (resolve, reject) => {
-        const response = await fetch(`/locales/${lang}/strings.json`);
-        const translation = await response.json();
-
+    return new Promise((resolve, reject) => {
         i18n.init({
             lng: lang,
-            resources: {
-                [lang]: {translation}
-            }
+            resources: {},
         }, (err, t) => {
             if (err) return reject(err);
 
@@ -17,4 +13,26 @@ export const init = ({lang}) => {
             resolve();
         });
     });
+};
+
+export const getLanguage = () => i18n.language;
+
+export const useTranslationNamespace = (namespaceName, resourcePromise, onLoad = ()=>{}) => {
+    useEffect(() => {
+        if (i18n.hasResourceBundle(i18n.language, namespaceName)) {
+            i18n.loadNamespaces(namespaceName, () => {
+                onLoad();
+            });
+
+        } else {
+            resourcePromise
+                .then(jsonFile => {
+                    i18n.addResourceBundle(i18n.language, namespaceName, jsonFile);
+                    i18n.loadNamespaces(namespaceName, () => {
+                        onLoad();
+                    });
+                });
+        }
+
+    }, [i18n.language]);
 };
