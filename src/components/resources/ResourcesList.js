@@ -12,12 +12,11 @@ export default function ResourcesList({
         <StyledList>
             {resources.map(({id, name, actionIds}, key) => {
                 const itemProps = {
-                    key,
                     name,
                     isSelected: id === selectedResourceId,
                     onClick: () => selectResource(id, actionIds)
                 };
-                return <ResourceItem {...itemProps} />;
+                return <ResourceItem key={key} {...itemProps} />;
             })}
         </StyledList>
     );

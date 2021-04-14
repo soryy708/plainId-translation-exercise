@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ActionsSection, DetailsHeader, GeneralDetailsSection} from './';
+import {ActionsSection, DetailsHeader, GeneralDetailsSection} from '.';
 import {VerticalContainer} from '../../styles/commonStyles';
 import styled from 'styled-components';
 

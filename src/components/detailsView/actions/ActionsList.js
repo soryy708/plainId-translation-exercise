@@ -14,10 +14,9 @@ export default function ActionsList({resourceActions}) {
         <ActionsStyledList>
             {resourceActions.map(({name}, key) => {
                 const actionProps = {
-                    key,
                     name
                 };
-                return <ActionItem {...actionProps} />;
+                return <ActionItem key={key} {...actionProps} />;
             })}
         </ActionsStyledList>
     );
