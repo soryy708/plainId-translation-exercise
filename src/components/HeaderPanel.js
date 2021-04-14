@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from '../assets/images/plainid-logo-white.png';
 import {headerPanelHeight, HeaderText} from '../styles/commonStyles';
+import { setLanguage } from '../service/translation';
 
 const HeaderPanelContainer = styled.header`
   display: flex;
@@ -35,6 +36,11 @@ export default function HeaderPanel() {
         <HeaderPanelContainer>
             <Logo {...logoProps} />
             <HeaderPanelText>PlainID- Demo App</HeaderPanelText>
+            <select
+              onChange={(ev) => setLanguage(ev.target.value)}
+            >
+              <option value="en-US">English (US)</option>
+            </select>
         </HeaderPanelContainer>
     );
 }

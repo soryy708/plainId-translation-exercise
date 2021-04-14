@@ -17,6 +17,14 @@ export const init = ({lang}) => {
 
 export const getLanguage = () => i18n.language;
 
+/**
+ * 
+ * @param {String} languageCode ISO 639-1 language code
+ */
+export const setLanguage = (languageCode) => {
+    i18n.changeLanguage(languageCode);
+};
+
 export const useTranslationNamespace = (namespaceName, resourcePromise, onLoad = ()=>{}) => {
     useEffect(() => {
         i18n.setDefaultNamespace(namespaceName);
