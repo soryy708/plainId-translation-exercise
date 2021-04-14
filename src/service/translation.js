@@ -19,6 +19,8 @@ export const getLanguage = () => i18n.language;
 
 export const useTranslationNamespace = (namespaceName, resourcePromise, onLoad = ()=>{}) => {
     useEffect(() => {
+        i18n.setDefaultNamespace(namespaceName);
+
         if (i18n.hasResourceBundle(i18n.language, namespaceName)) {
             i18n.loadNamespaces(namespaceName, () => {
                 onLoad();

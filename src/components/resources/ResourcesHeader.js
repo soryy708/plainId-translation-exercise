@@ -18,8 +18,8 @@ export default function ResourcesHeader() {
 
     return (
         <>
-            <ResourceHeaderText>{t('resourcesHeader:TITLE')}</ResourceHeaderText>
-            <SubHeaderText>{t('resourcesHeader:SUBTITLE')}</SubHeaderText>
+            <ResourceHeaderText>{t('TITLE')}</ResourceHeaderText>
+            <SubHeaderText>{t('SUBTITLE')}</SubHeaderText>
         </>
     );
 }

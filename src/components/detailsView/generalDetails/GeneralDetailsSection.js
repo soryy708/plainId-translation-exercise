@@ -21,25 +21,25 @@ export default function GeneralDetailsSection({resource}) {
 
     const {t} = global;
     const sectionHeaderProps = {
-        headerText: t('generalDetails:SECTION_TITLE'),
-        subHeaderText: t('generalDetails:SECTION_SUB_TITLE')
+        headerText: t('SECTION_TITLE'),
+        subHeaderText: t('SECTION_SUB_TITLE')
     };
     const {name, description, resourceType, path} = resource;
     const nameProps = {
         value: name,
-        label: t('generalDetails:SECTION_FIELD_TITLE_NAME')
+        label: t('SECTION_FIELD_TITLE_NAME')
     };
     const descriptionProps = {
         value: description,
-        label: t('generalDetails:SECTION_FIELD_TITLE_DESCRIPTION')
+        label: t('SECTION_FIELD_TITLE_DESCRIPTION')
     };
     const resourceTypeProps = {
         value: resourceType,
-        label: t('generalDetails:SECTION_FIELD_TITLE_RESOURCE_TYPE')
+        label: t('SECTION_FIELD_TITLE_RESOURCE_TYPE')
     };
     const pathProps = {
         value: path,
-        label: t('generalDetails:SECTION_FIELD_TITLE_RESOURCE_PATH')
+        label: t('SECTION_FIELD_TITLE_RESOURCE_PATH')
     };
 
     const language = getLanguage();
