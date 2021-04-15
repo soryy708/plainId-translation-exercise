@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SectionHeader from '../common/SectionHeader';
 import {ReadOnlyTextArea, TextField} from '../../fields';
-import { getLocalizer, useTranslationNamespace } from '../../../service/translation';
+import { useTranslationNamespace } from '../../../service/translation';
 
 const SectionContainer = styled.div`
     width: 60%;
@@ -17,9 +17,10 @@ const FieldsContainer = styled.div`
 `;
 
 export default function GeneralDetailsSection({resource}) {
-    useTranslationNamespace('generalDetails', language => import(`./locales/${language}/strings.json`));
+    const [{t}, setT] = useState(() => ({t: (s) => s}));
 
-    const t = getLocalizer();
+    useTranslationNamespace('generalDetails', language => import(`./locales/${language}/strings.json`), newT => setT({t: newT}));
+
     const sectionHeaderProps = {
         headerText: t('SECTION_TITLE'),
         subHeaderText: t('SECTION_SUB_TITLE')

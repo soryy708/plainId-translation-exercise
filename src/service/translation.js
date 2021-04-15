@@ -1,25 +1,21 @@
 import i18n from 'i18next';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const globalContext = {
-    t: null,
     languageChangeListeners: [],
 };
 
-export const init = ({lang}, context = globalContext) => {
+export const init = ({lang}) => {
     return new Promise((resolve, reject) => {
         i18n.init({
             lng: lang,
             resources: {},
-        }, (err, t) => {
+        }, (err) => {
             if (err) return reject(err);
-            context.t = t;
             resolve();
         });
     });
 };
-
-export const getLocalizer = (context = globalContext) => context.t;
 
 /**
  * 
@@ -53,15 +49,11 @@ const removeLanguageChangeListener = (listener, context = globalContext) => {
  * @param {string} namespaceName 
  * @param {(string) => Promise<{[key: string]: string}>} resourcePromiseMaker 
  */
-export const useTranslationNamespace = (namespaceName, resourcePromiseMaker) => {
-    const [, setLoadCount] = useState(0);
-
-    i18n.setDefaultNamespace(namespaceName);
-
+export const useTranslationNamespace = (namespaceName, resourcePromiseMaker, tGetter) => {
     const loadBundle = () => {
         if (i18n.hasResourceBundle(i18n.language, namespaceName)) {
             i18n.loadNamespaces(namespaceName, () => {
-                setLoadCount(lc => lc + 1);
+                tGetter(i18n.getFixedT(null, namespaceName));
             });
 
         } else {
@@ -69,7 +61,7 @@ export const useTranslationNamespace = (namespaceName, resourcePromiseMaker) => 
                 .then(jsonFile => {
                     i18n.addResourceBundle(i18n.language, namespaceName, jsonFile);
                     i18n.loadNamespaces(namespaceName, () => {
-                        setLoadCount(lc => lc + 1);
+                        tGetter(i18n.getFixedT(null, namespaceName));
                     });
                 });
         }
